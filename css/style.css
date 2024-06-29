@@ -1,0 +1,234 @@
+/* Глобальные стили */
+html {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  font-family: "" sans-serif;
+  background-color: #151515;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 0;
+}
+
+p {
+  margin-top: 0;
+}
+
+img,
+svg {
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+/* Переменная ширины и высоты */
+:root {
+  --index: calc(1vw + 1vh);
+  --transition: cubic-bezier(0.1, .7, 0, 1);
+}
+
+
+
+/* Стили общего назначения */
+
+/* Скрытие элементов от пользовтеля */
+.visually-hidden {
+  position: absolute;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  width: 1px;
+  height: 1px;
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.flex {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.list-reset {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding: 30px 15px;
+  max-width: 1200px;
+  width: 100%;
+  height: 100vh;
+}
+
+
+
+/* Стили для картинок */
+.items {
+  column-gap: 2px;
+  perspective: calc(var(--index) * 48);
+  /* --elements: 10;
+  --column-gap: 10px; */
+}
+
+.items__item {
+  /* width: calc((100% - (var(--elements) - 1) * var(--column-gap)) / var(--elements)); */
+  width: calc(var(--index) * 3);
+  height: calc(var(--index) * 12);
+  background: linear-gradient(180deg, #ff7b00, #e70de0, #febc06);
+  cursor: pointer;
+  filter: grayscale() brightness(70%);
+  transition: 1.5s var(--transition), filter 1.5s var(--transition), width 1.5s;
+  will-change: transform, filter;
+}
+
+.item-content {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.5s var(--transition);
+}
+
+.items__item:focus .item-content {
+  opacity: 1;
+}
+
+.items__item:focus,
+.items__item:active {
+  width: 28vw;
+  z-index: 2;
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 10));
+}
+
+.items__item:hover {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 14));
+}
+
+.items__item::before,
+.items__item::after {
+  content: "";
+  position: absolute;
+  right: calc(var(--index) * -1);
+  width: 20px;
+  height: 100%;
+}
+
+.items__item::after {
+  left: calc(var(--index) * -1);
+}
+
+
+
+/* right */
+.items__item:hover+* {
+  filter: inherit;
+  z-index: -1;
+  transform: translateZ(calc(var(--index) * 13)) rotateY(20deg);
+}
+
+.items__item:hover+*+* {
+  filter: inherit;
+  z-index: -2;
+  transform: translateZ(calc(var(--index) * 10.5)) rotateY(25deg);
+}
+
+.items__item:hover+*+*+* {
+  filter: inherit;
+  z-index: -3;
+  transform: translateZ(calc(var(--index) * 8)) rotateY(25deg);
+}
+
+.items__item:hover+*+*+*+* {
+  z-index: -4;
+  transform: translateZ(calc(var(--index) * 5.5)) rotateY(10deg);
+}
+
+.items__item:hover+*+*+*+*+* {
+  z-index: -5;
+  transform: translateZ(calc(var(--index) * 3.5));
+}
+
+.items__item:hover+*+*+*+*+*+* {
+  z-index: -6;
+  transform: translateZ(calc(var(--index) * 0.5));
+}
+
+
+
+/* left */
+.items__item:has(+ :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 13)) rotateY(-20deg);
+}
+
+.items__item:has(+*+ :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 10.5)) rotateY(-25deg);
+}
+
+.items__item:has(+*+*+ :hover) {
+  filter: inherit;
+  transform: translateZ(calc(var(--index) * 8)) rotateY(-25deg);
+}
+
+.items__item:has(+*+*+*+ :hover) {
+  transform: translateZ(calc(var(--index) * 5.5)) rotateY(-10deg);
+}
+
+.items__item:has(+*+*+*+*+ :hover) {
+  transform: translateZ(calc(var(--index) * 3.5));
+}
+
+.items__item:has(+*+*+*+*+*+ :hover) {
+  transform: translateZ(calc(var(--index) * 0.5));
+}
+
+.item__title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.item__descr {
+  text-align: center;
+  color: #fff;
+}
+
+.item__button {
+  display: block;
+  margin: 0 auto;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 6px;
+  font-size: 17px;
+  color: #fff;
+  background-color: #febc06;
+  cursor: pointer;
+}
